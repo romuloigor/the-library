@@ -35,6 +35,10 @@ library:
       description: Diagnóstico de saúde e checagens operacionais do cmux, sockets e automações
       source: /Users/romuloigor/.gemini/config/skills/cmux-diagnostics/SKILL.md
 
+    - name: developing-with-bigquery
+      description: Desenvolvimento avançado, modelagem de dados e rotinas de consulta no BigQuery
+      source: /Users/romuloigor/antigravity-reset-backup-20260624_083528/dot-gemini-antigravity/skills/developing-with-bigquery/SKILL.md
+
     - name: gcp-billing-operations
       description: Operações de FinOps, relatórios de custos e gerenciamento de faturamento no GCP
       source: /Users/romuloigor/Local/terraform-gcp-infra/skills/gcp-billing-operations/SKILL.md
@@ -66,6 +70,10 @@ library:
     - name: houer-cloud-risk-report
       description: Geração de relatórios de análise de risco e conformidade em nuvem
       source: /Users/romuloigor/claude-backup-20260608-144136/.claude/skills/houer-cloud-risk-report/SKILL.md
+
+    - name: ifc-metadata-mcp
+      description: Servidor IFC Metadata MCP somente leitura para parsing de modelos BIM 3D (IfcOpenShell, Pydantic, Cloud Run)
+      source: /Users/romuloigor/Local/ifc-metadata-mcp/SKILL.md
 
     - name: mac-mini-remote-access
       description: Conexão e gerenciamento de acesso remoto de tela ao Mac Mini via Tailscale e VNC
