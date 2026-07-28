@@ -10,6 +10,70 @@ default_dirs:
     - global: ~/.claude/commands/
 
 library:
-  skills: []
+  skills:
+    - name: adicione-novo-tester
+      description: Adiciona novos beta testers em builds e testes do aplicativo iOS
+      source: /Users/romuloigor/Local/usit-tagaffinity/skills/adicione-novo-tester/SKILL.md
+
+    - name: azure-devops-pipeline-triage
+      description: Diagnóstico e triagem automatizada de falhas em pipelines CI/CD do Azure DevOps
+      source: /Users/romuloigor/.codex/skills/azure-devops-pipeline-triage/SKILL.md
+
+    - name: cmux
+      description: Controle de topologia, roteamento e navegação de janelas/painéis no cmux
+      source: /Users/romuloigor/.gemini/config/skills/cmux/SKILL.md
+
+    - name: cmux-custom-sidebar
+      description: Criação e customização de sidebars no cmux usando arquivos SwiftUI-style
+      source: /Users/romuloigor/.gemini/config/skills/cmux-custom-sidebar/SKILL.md
+
+    - name: cmux-diagnostics
+      description: Diagnóstico de saúde e checagens operacionais do cmux, sockets e automações
+      source: /Users/romuloigor/.gemini/config/skills/cmux-diagnostics/SKILL.md
+
+    - name: gcp-billing-operations
+      description: Operações de FinOps, relatórios de custos e gerenciamento de faturamento no GCP
+      source: /Users/romuloigor/Local/terraform-gcp-infra/skills/gcp-billing-operations/SKILL.md
+
+    - name: gcp-iam-governance
+      description: Auditoria e governança de permissões IAM e Security Health Analytics no GCP
+      source: /Users/romuloigor/Local/terraform-gcp-infra/skills/gcp-iam-governance/SKILL.md
+
+    - name: gcp-support-cases
+      description: Gestão e acompanhamento automatizado de casos de suporte junto ao Google Cloud
+      source: /Users/romuloigor/Local/terraform-gcp-infra/skills/gcp-support-cases/SKILL.md
+
+    - name: gemini-model-selection
+      description: Matriz de seleção de modelos Gemini (gemini-3.6-flash vs gemini-3.5-flash-lite) e effort levels para agy
+      source: /Users/romuloigor/Local/usit-developer-guide/.agents/skills/gemini-model-selection/SKILL.md
+
+    - name: gitea-issue-workflow
+      description: Workflow padrão, Definition of Done e protocolo anti-loop para tarefas no Gitea
+      source: /Users/romuloigor/Local/usit-developer-guide/.agents/skills/gitea-issue-workflow/SKILL.md
+
+    - name: mac-mini-remote-access
+      description: Conexão e gerenciamento de acesso remoto de tela ao Mac Mini via Tailscale e VNC
+      source: /Users/romuloigor/Local/usit-developer-guide/.agents/skills/mac-mini-remote-access/SKILL.md
+
+    - name: pdf
+      description: Extração, leitura e manipulação de documentos PDF
+      source: /Users/romuloigor/.codex/skills/pdf/SKILL.md
+
+    - name: screenshot
+      description: Captura e inspeção visual de telas no sistema
+      source: /Users/romuloigor/.codex/skills/screenshot/SKILL.md
+
+    - name: sre-log-analysis
+      description: Análise de logs, métricas de observabilidade e incidentes SRE no GCP
+      source: /Users/romuloigor/Local/terraform-gcp-infra/skills/sre_log_analysis/SKILL.md
+
+    - name: xcode-cloud-api
+      description: Integração e gerenciamento de workflows na API do Xcode Cloud
+      source: /Users/romuloigor/Local/usit-tagaffinity/skills/xcode-cloud-api/SKILL.md
+
+    - name: xcode-mcp
+      description: Integração MCP com ferramentas de build, testes e inspeção do Xcode
+      source: /Users/romuloigor/Local/usit-tagaffinity/skills/xcode-mcp/SKILL.md
+
   agents: []
   prompts: []
