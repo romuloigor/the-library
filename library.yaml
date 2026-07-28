@@ -19,6 +19,10 @@ library:
       description: Diagnóstico e triagem automatizada de falhas em pipelines CI/CD do Azure DevOps
       source: /Users/romuloigor/.codex/skills/azure-devops-pipeline-triage/SKILL.md
 
+    - name: briefing-tech-diario
+      description: Briefing matinal de notícias de IA, cloud (AWS/GCP) e Python em português
+      source: /Users/romuloigor/Claude/Scheduled/briefing-tech-diario/SKILL.md
+
     - name: cmux
       description: Controle de topologia, roteamento e navegação de janelas/painéis no cmux
       source: /Users/romuloigor/.gemini/config/skills/cmux/SKILL.md
@@ -50,6 +54,14 @@ library:
     - name: gitea-issue-workflow
       description: Workflow padrão, Definition of Done e protocolo anti-loop para tarefas no Gitea
       source: /Users/romuloigor/Local/usit-developer-guide/.agents/skills/gitea-issue-workflow/SKILL.md
+
+    - name: graphify
+      description: Converte repositórios e documentos em grafos de conhecimento navegáveis (GraphRAG e relatórios HTML)
+      source: /Users/romuloigor/claude-backup-20260608-144136/.claude/skills/graphify/SKILL.md
+
+    - name: houer-cloud-risk-report
+      description: Geração de relatórios de análise de risco e conformidade em nuvem
+      source: /Users/romuloigor/claude-backup-20260608-144136/.claude/skills/houer-cloud-risk-report/SKILL.md
 
     - name: mac-mini-remote-access
       description: Conexão e gerenciamento de acesso remoto de tela ao Mac Mini via Tailscale e VNC
