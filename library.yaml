@@ -55,6 +55,10 @@ library:
       description: Workflow padrão, Definition of Done e protocolo anti-loop para tarefas no Gitea
       source: /Users/romuloigor/Local/usit-developer-guide/.agents/skills/gitea-issue-workflow/SKILL.md
 
+    - name: gitea-squad-manager
+      description: Gerenciamento da Squad Antigravity no Gitea (issues, notificações, comentários, wiki) e launcher do Mestre
+      source: /Users/romuloigor/Local/the-library/skills/gitea-squad-manager/SKILL.md
+
     - name: graphify
       description: Converte repositórios e documentos em grafos de conhecimento navegáveis (GraphRAG e relatórios HTML)
       source: /Users/romuloigor/claude-backup-20260608-144136/.claude/skills/graphify/SKILL.md
