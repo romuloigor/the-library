@@ -15,6 +15,10 @@ library:
       description: Adiciona novos beta testers em builds e testes do aplicativo iOS
       source: /Users/romuloigor/Local/usit-tagaffinity/skills/adicione-novo-tester/SKILL.md
 
+    - name: azure-devops-build-logs
+      description: Coleta automatizada de timeline e logs de builds do Azure DevOps usando Azure CLI (script fetch_build_logs.sh)
+      source: /Users/romuloigor/Local/the-library/skills/azure-devops-build-logs/SKILL.md
+
     - name: azure-devops-pipeline-triage
       description: Diagnóstico e triagem automatizada de falhas em pipelines CI/CD do Azure DevOps
       source: /Users/romuloigor/.codex/skills/azure-devops-pipeline-triage/SKILL.md
@@ -34,6 +38,10 @@ library:
     - name: cmux-diagnostics
       description: Diagnóstico de saúde e checagens operacionais do cmux, sockets e automações
       source: /Users/romuloigor/.gemini/config/skills/cmux-diagnostics/SKILL.md
+
+    - name: dataplex-documentation-scan
+      description: Criação, monitoramento e publicação de scans de documentação de dados do Dataplex em tabelas do BigQuery
+      source: /Users/romuloigor/Local/the-library/skills/dataplex-documentation-scan/SKILL.md
 
     - name: developing-with-bigquery
       description: Desenvolvimento avançado, modelagem de dados e rotinas de consulta no BigQuery
@@ -78,6 +86,10 @@ library:
     - name: mac-mini-remote-access
       description: Conexão e gerenciamento de acesso remoto de tela ao Mac Mini via Tailscale e VNC
       source: /Users/romuloigor/Local/usit-developer-guide/.agents/skills/mac-mini-remote-access/SKILL.md
+
+    - name: oracle-odb-incorta
+      description: Conexão, descoberta de schemas e execução de consultas no banco Oracle EBS (QEBSCNO) via VM odb-incorta
+      source: /Users/romuloigor/Local/the-library/skills/oracle-odb-incorta/SKILL.md
 
     - name: pdf
       description: Extração, leitura e manipulação de documentos PDF
