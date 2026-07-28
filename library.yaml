@@ -79,6 +79,10 @@ library:
       description: Análise de logs, métricas de observabilidade e incidentes SRE no GCP
       source: /Users/romuloigor/Local/terraform-gcp-infra/skills/sre_log_analysis/SKILL.md
 
+    - name: user-profile-and-preferences
+      description: Perfil profissional de Rômulo Igor, diretrizes operacionais, preferências de trabalho e contextos de projetos
+      source: /Users/romuloigor/Local/the-library/skills/user-profile-and-preferences/SKILL.md
+
     - name: xcode-cloud-api
       description: Integração e gerenciamento de workflows na API do Xcode Cloud
       source: /Users/romuloigor/Local/usit-tagaffinity/skills/xcode-cloud-api/SKILL.md
