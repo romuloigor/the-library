@@ -1,35 +1,35 @@
 ---
 name: gitea-squad-manager
-description: Gerenciamento da Squad Antigravity no Gitea (issues, notificações, comentários, wiki central) e acionamento do Agente Mestre via cmux.
+description: Gerenciamento da Squad Antigravity no Gitea (issues, notificações, comentários, repositórios, wiki) e bootstrapping automatizado de projetos SaaS via just new-saas.
 ---
 
-# Gitea Squad Manager & Agente Mestre
+# Gitea Squad Manager & Bootstrapper SaaS
 
-Skill para interação com a instância local do Gitea (`http://mini:3000` / `http://localhost:3000`) e controle da Squad de Agentes da organização `usitsupport`.
+Skill para interação com a instância local do Gitea (`http://mini:3000` / `http://localhost:3000`), criação de repositórios para organizações (`britsuporte`, `usitsupport`) e bootstrapping automatizado de novos projetos SaaS.
 
 ---
 
 ## 📌 Principais Capacidades
 
-1. **Notificações ('Gitea News')**: Consultar notificações não lidas.
-2. **Gestão de Issues (Definition of Done)**: Listar, criar, comentar e fechar Issues com suporte ao protocolo Anti-Loop.
-3. **Wiki Central (SSoT)**: Listar e consultar páginas da Wiki de Arquitetura.
-4. **Agente Mestre**: Disparar o Agente Mestre em um workspace dedicado do `cmux`.
+1. **Criação de Repositórios & SaaS**: Criar novos repositórios em organizações e inicializar a esteira completa (Spec Kit + cmux + AGENTS.md + justfile).
+2. **Notificações ('Gitea News')**: Consultar notificações não lidas.
+3. **Gestão de Issues (Definition of Done)**: Listar, criar, comentar e fechar Issues com suporte ao protocolo Anti-Loop.
+4. **Wiki Central (SSoT)**: Listar e consultar páginas da Wiki de Arquitetura.
+5. **Agente Mestre**: Disparar o Agente Mestre em um workspace dedicado do `cmux`.
 
 ---
 
 ## 🛠️ Comandos & Atalhos via Terminal (`just` / Python)
 
-| Ação | Comando Python direto |
-| :--- | :--- |
-| **Notificações** | `python3 scripts/gitea_helper.py news` |
-| **Listar Issues** | `python3 scripts/gitea_helper.py issues --repo usitsupport/usit-developer-guide` |
-| **Ler Comentários** | `python3 scripts/gitea_helper.py comments --issue X` |
-| **Criar Issue** | `python3 scripts/gitea_helper.py create-issue --title "..." --body "..." --assignee "antigravity-bot-mini"` |
-| **Comentar em Issue** | `python3 scripts/gitea_helper.py comment-issue --issue X --body "..."` |
-| **Fechar Issue** | `python3 scripts/gitea_helper.py close-issue --issue X` |
-| **Listar Wiki** | `python3 scripts/gitea_helper.py wiki` |
-| **Iniciar Mestre** | `python3 scripts/mestre_launcher.py --org usitsupport --repo usit-developer-guide` |
+| Ação | Comando `just` | Comando Python direto |
+| :--- | :--- | :--- |
+| **Novo Projeto SaaS** | `just new-saas org="britsuporte" name="meu-saas"` | `python3 scripts/new_saas_bootstrapper.py --org britsuporte --name meu-saas` |
+| **Criar Repositório** | `just gitea create-repo org="britsuporte" name="meu-repo"` | `python3 scripts/gitea_helper.py create-repo --org britsuporte --name meu-repo` |
+| **Notificações** | `just gitea news` | `python3 scripts/gitea_helper.py news` |
+| **Listar Issues** | `just gitea issues state=open` | `python3 scripts/gitea_helper.py issues --repo usitsupport/usit-developer-guide` |
+| **Criar Issue** | `just gitea create-issue title="..." body="..."` | `python3 scripts/gitea_helper.py create-issue --title "..." --body "..."` |
+| **Fechar Issue** | `just gitea close-issue issue_id=X` | `python3 scripts/gitea_helper.py close-issue --issue X` |
+| **Iniciar Mestre** | `just mestre org=usitsupport repo=usit-developer-guide` | `python3 scripts/mestre_launcher.py --org usitsupport --repo usit-developer-guide` |
 
 ---
 

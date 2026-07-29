@@ -98,6 +98,21 @@ def cmd_close_issue(args):
     res = request(f'/repos/{repo}/issues/{args.issue}', method='PATCH', data=payload)
     print(f"🔒 Issue #{args.issue} fechada com sucesso!")
 
+def cmd_create_repo(args):
+    org = args.org or "britsuporte"
+    payload = {
+        'name': args.name,
+        'description': args.description if args.description else f"Repositório {args.name}",
+        'private': str(args.private).lower() in ('true', '1', 'yes'),
+        'auto_init': True,
+        'default_branch': 'main'
+    }
+    print(f"🚀 Criando repositório '{org}/{args.name}' no Gitea ({GITEA_URL})...")
+    res = request(f'/orgs/{org}/repos', method='POST', data=payload)
+    print(f"✅ Repositório '{org}/{res.get('name', args.name)}' criado com sucesso!")
+    print(f"🔗 Link: {res.get('html_url')}")
+    print(f"📦 Clone URL: {res.get('clone_url')}")
+
 def cmd_members(args):
     print("👥 === MEMBROS DA ORGANIZAÇÃO USITSUPPORT ===")
     members = request('/orgs/usitsupport/members')
@@ -272,6 +287,12 @@ def main():
     p_close.add_argument("--issue", required=True)
     p_close.add_argument("--repo", default="usitsupport/usit-developer-guide")
 
+    p_create_repo = subparsers.add_parser("create-repo", help="Criar novo repositório na organização")
+    p_create_repo.add_argument("--org", default="britsuporte", help="Organização no Gitea")
+    p_create_repo.add_argument("--name", required=True, help="Nome do repositório")
+    p_create_repo.add_argument("--description", default="", help="Descrição do repositório")
+    p_create_repo.add_argument("--private", default="true", help="Repositório privado (true/false)")
+
     subparsers.add_parser("members", help="Listar membros da organização")
 
     p_wiki = subparsers.add_parser("wiki", help="Listar ou visualizar páginas da wiki")
@@ -287,6 +308,7 @@ def main():
         "create-issue": cmd_create_issue,
         "comment-issue": cmd_comment_issue,
         "close-issue": cmd_close_issue,
+        "create-repo": cmd_create_repo,
         "members": cmd_members,
         "wiki": cmd_wiki
     }
