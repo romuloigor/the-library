@@ -19,6 +19,15 @@ def run_cmd(cmd_list, cwd=None, check=False):
             sys.exit(1)
         return False, "", str(e)
 
+def clean_param(val):
+    if not val:
+        return val
+    if "=" in str(val):
+        key, _, rest = str(val).partition("=")
+        if key.lstrip("-") in ("org", "name", "description", "path", "private"):
+            return rest.strip('"\'')
+    return str(val).strip('"\'')
+
 def main():
     parser = argparse.ArgumentParser(description="Bootstrapper de Novo Projeto SaaS no Gitea")
     parser.add_argument("--org", default="britsuporte", help="Organização no Gitea (padrão: britsuporte)")
@@ -27,10 +36,11 @@ def main():
     parser.add_argument("--path", default="", help="Caminho local para clone (padrão: ~/Local/<name>)")
     args = parser.parse_args()
 
-    org = args.org
-    name = args.name
-    desc = args.description or f"Projeto SaaS {name}"
-    target_path = os.path.expanduser(args.path) if args.path else os.path.expanduser(f"~/Local/{name}")
+    org = clean_param(args.org) or "britsuporte"
+    name = clean_param(args.name)
+    raw_path = clean_param(args.path)
+    desc = clean_param(args.description) or f"Projeto SaaS {name}"
+    target_path = os.path.expanduser(raw_path) if raw_path else os.path.expanduser(f"~/Local/{name}")
 
     print("=" * 70)
     print(f"🚀 INICIALIZANDO NOVO PROJETO SAAS: {org}/{name}")

@@ -98,18 +98,29 @@ def cmd_close_issue(args):
     res = request(f'/repos/{repo}/issues/{args.issue}', method='PATCH', data=payload)
     print(f"🔒 Issue #{args.issue} fechada com sucesso!")
 
+def clean_param(val):
+    if not val:
+        return val
+    if "=" in str(val):
+        key, _, rest = str(val).partition("=")
+        if key.lstrip("-") in ("org", "name", "description", "path", "private"):
+            return rest.strip('"\'')
+    return str(val).strip('"\'')
+
 def cmd_create_repo(args):
-    org = args.org or "britsuporte"
+    org = clean_param(args.org) or "britsuporte"
+    name = clean_param(args.name)
+    desc = clean_param(args.description) if args.description else f"Repositório {name}"
     payload = {
-        'name': args.name,
-        'description': args.description if args.description else f"Repositório {args.name}",
+        'name': name,
+        'description': desc,
         'private': str(args.private).lower() in ('true', '1', 'yes'),
         'auto_init': True,
         'default_branch': 'main'
     }
-    print(f"🚀 Criando repositório '{org}/{args.name}' no Gitea ({GITEA_URL})...")
+    print(f"🚀 Criando repositório '{org}/{name}' no Gitea ({GITEA_URL})...")
     res = request(f'/orgs/{org}/repos', method='POST', data=payload)
-    print(f"✅ Repositório '{org}/{res.get('name', args.name)}' criado com sucesso!")
+    print(f"✅ Repositório '{org}/{res.get('name', name)}' criado com sucesso!")
     print(f"🔗 Link: {res.get('html_url')}")
     print(f"📦 Clone URL: {res.get('clone_url')}")
 
