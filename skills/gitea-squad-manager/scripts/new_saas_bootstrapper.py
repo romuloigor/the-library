@@ -89,6 +89,19 @@ def main():
             shutil.rmtree(dst_agents_dir)
         shutil.copytree(src_agents_dir, dst_agents_dir)
 
+    src_gemini_dir = os.path.join(guide_dir, ".gemini")
+    dst_gemini_dir = os.path.join(target_path, ".gemini")
+    if os.path.exists(src_gemini_dir):
+        if not os.path.exists(dst_gemini_dir):
+            shutil.copytree(src_gemini_dir, dst_gemini_dir)
+        else:
+            src_cmd = os.path.join(src_gemini_dir, "commands")
+            dst_cmd = os.path.join(dst_gemini_dir, "commands")
+            if os.path.exists(src_cmd):
+                os.makedirs(dst_cmd, exist_ok=True)
+                for f in os.listdir(src_cmd):
+                    shutil.copy2(os.path.join(src_cmd, f), os.path.join(dst_cmd, f))
+
     # 5. Provisionar justfile e submódulos just/
     print("\n5️⃣  Provisionando justfile e módulos just...")
     src_just_dir = os.path.join(guide_dir, "just")
