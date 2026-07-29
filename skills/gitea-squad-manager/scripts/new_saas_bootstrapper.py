@@ -41,8 +41,8 @@ def main():
     guide_dir = "/Users/romuloigor/Local/usit-developer-guide"
     helper_script = os.path.join(guide_dir, "scripts", "gitea_helper.py")
     
-    print("\n1️⃣  Criando repositório no Gitea...")
-    run_cmd(["python3", helper_script, "create-repo", "--org", org, "--name", name, "--description", desc], check=False)
+    print("\n1️⃣  Criando repositório no Gitea (Privado: true)...")
+    run_cmd(["python3", helper_script, "create-repo", "--org", org, "--name", name, "--description", desc, "--private", "true"], check=False)
 
     # 2. Preparar pasta local e clone/init git
     print("\n2️⃣  Configurando diretório local...")
