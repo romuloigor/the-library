@@ -99,6 +99,10 @@ library:
       description: Captura e inspeção visual de telas no sistema
       source: /Users/romuloigor/.codex/skills/screenshot/SKILL.md
 
+    - name: spec-kit
+      description: Guia completo, automação e comandos do GitHub Spec Kit e Spec-Driven Development (SDD) para especificação executável
+      source: /Users/romuloigor/Local/the-library/skills/spec-kit/SKILL.md
+
     - name: sre-log-analysis
       description: Análise de logs, métricas de observabilidade e incidentes SRE no GCP
       source: /Users/romuloigor/Local/terraform-gcp-infra/skills/sre_log_analysis/SKILL.md
