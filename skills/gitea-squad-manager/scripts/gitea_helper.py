@@ -28,9 +28,10 @@ def request(path, method='GET', data=None):
     req = urllib.request.Request(url, data=payload, headers=headers, method=method)
     try:
         with urllib.request.urlopen(req) as resp:
-            if resp.status == 204:
-                return {}
-            return json.loads(resp.read().decode('utf-8'))
+            content = resp.read().decode('utf-8')
+            if not content or resp.status in (201, 204):
+                return {'status': 'success', 'code': resp.status}
+            return json.loads(content)
     except Exception as e:
         print(f"⚠️ Erro na requisição [{method} {path}]: {e}")
         sys.exit(1)
@@ -123,6 +124,41 @@ def cmd_create_repo(args):
     print(f"✅ Repositório '{org}/{res.get('name', name)}' criado com sucesso!")
     print(f"🔗 Link: {res.get('html_url')}")
     print(f"📦 Clone URL: {res.get('clone_url')}")
+
+def cmd_list_org_secrets(args):
+    org = clean_param(args.org) or "britsuporte"
+    print(f"🔑 === SEGREDOS (ACTIONS SECRETS) DA ORGANIZAÇÃO: {org} ===")
+    res = request(f'/orgs/{org}/actions/secrets')
+    if isinstance(res, list):
+        if not res:
+            print("Nenhum segredo cadastrado.")
+            return
+        for s in res:
+            name = s.get('name') if isinstance(s, dict) else str(s)
+            created = s.get('created_at', '') if isinstance(s, dict) else ''
+            print(f" 🔑 {name} (Criado em: {created})")
+    else:
+        print(res)
+
+def cmd_set_org_secret(args):
+    org = clean_param(args.org) or "britsuporte"
+    name = clean_param(args.name)
+    value = args.value
+    if args.file and os.path.exists(args.file):
+        with open(args.file, 'r', encoding='utf-8', errors='ignore') as f:
+            value = f.read()
+    if not value:
+        print("❌ Nenhum valor de segredo fornecido (use --value ou --file).")
+        sys.exit(1)
+    payload = {'data': value}
+    res = request(f'/orgs/{org}/actions/secrets/{name}', method='PUT', data=payload)
+    print(f"✅ Segredo '{name}' cadastrado/atualizado com sucesso na organização '{org}'!")
+
+def cmd_delete_org_secret(args):
+    org = clean_param(args.org) or "britsuporte"
+    name = clean_param(args.name)
+    res = request(f'/orgs/{org}/actions/secrets/{name}', method='DELETE')
+    print(f"🗑️ Segredo '{name}' removido com sucesso da organização '{org}'!")
 
 def cmd_members(args):
     print("👥 === MEMBROS DA ORGANIZAÇÃO USITSUPPORT ===")
@@ -304,6 +340,19 @@ def main():
     p_create_repo.add_argument("--description", default="", help="Descrição do repositório")
     p_create_repo.add_argument("--private", default="true", help="Repositório privado (true/false)")
 
+    p_secrets = subparsers.add_parser("secrets", help="Listar segredos (Actions Secrets) da organização")
+    p_secrets.add_argument("--org", default="britsuporte", help="Organização no Gitea")
+
+    p_set_sec = subparsers.add_parser("set-secret", help="Cadastrar ou atualizar segredo na organização")
+    p_set_sec.add_argument("--org", default="britsuporte", help="Organização no Gitea")
+    p_set_sec.add_argument("--name", required=True, help="Nome da variável do segredo")
+    p_set_sec.add_argument("--value", default="", help="Valor do segredo")
+    p_set_sec.add_argument("--file", default="", help="Caminho do arquivo contendo o valor do segredo")
+
+    p_del_sec = subparsers.add_parser("delete-secret", help="Remover segredo da organização")
+    p_del_sec.add_argument("--org", default="britsuporte", help="Organização no Gitea")
+    p_del_sec.add_argument("--name", required=True, help="Nome da variável do segredo")
+
     subparsers.add_parser("members", help="Listar membros da organização")
 
     p_wiki = subparsers.add_parser("wiki", help="Listar ou visualizar páginas da wiki")
@@ -320,6 +369,9 @@ def main():
         "comment-issue": cmd_comment_issue,
         "close-issue": cmd_close_issue,
         "create-repo": cmd_create_repo,
+        "secrets": cmd_list_org_secrets,
+        "set-secret": cmd_set_org_secret,
+        "delete-secret": cmd_delete_org_secret,
         "members": cmd_members,
         "wiki": cmd_wiki
     }
