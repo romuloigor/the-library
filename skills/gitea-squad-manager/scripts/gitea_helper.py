@@ -101,12 +101,12 @@ def cmd_close_issue(args):
 
 def clean_param(val):
     if not val:
-        return val
-    if "=" in str(val):
-        key, _, rest = str(val).partition("=")
-        if key.lstrip("-") in ("org", "name", "description", "path", "private"):
-            return rest.strip('"\'')
-    return str(val).strip('"\'')
+        return ""
+    val_str = str(val).strip('"\'')
+    if "=" in val_str and not val_str.startswith("http"):
+        _, _, rest = val_str.partition("=")
+        return rest.strip('"\'')
+    return val_str
 
 def cmd_create_repo(args):
     org = clean_param(args.org) or "britsuporte"
@@ -185,6 +185,8 @@ def cmd_wiki(args):
 
 def ensure_webhook(repo_full_name, port=5001):
     owner, repo = repo_full_name.split('/', 1) if '/' in repo_full_name else ('usitsupport', repo_full_name)
+    owner = clean_param(owner)
+    repo = clean_param(repo)
     repo_name = repo
     webhook_url = f"http://100.86.22.127:{port}"
     
