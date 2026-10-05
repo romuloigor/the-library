@@ -1,0 +1,6 @@
+interface:
+  display_name: "Desenvolvimento do ciclo de software"
+  short_description: "Implemente, teste e entregue para auditoria"
+  default_prompt: "Use $dev-ciclo-de-software para assumir o perfil de desenvolvimento e executar a tarefa indicada com testes e evidências."
+policy:
+  allow_implicit_invocation: true

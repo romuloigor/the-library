@@ -1,0 +1,6 @@
+interface:
+  display_name: "Auditor do ciclo de software"
+  short_description: "Audite entregas, testes e aceite independente"
+  default_prompt: "Use $auditor-ciclo-de-software para assumir o perfil auditor e revisar a entrega indicada contra seus critérios e evidências."
+policy:
+  allow_implicit_invocation: true

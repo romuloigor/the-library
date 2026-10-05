@@ -15,6 +15,10 @@ library:
       description: Adiciona novos beta testers em builds e testes do aplicativo iOS
       source: /Users/romuloigor/Local/usit-tagaffinity/skills/adicione-novo-tester/SKILL.md
 
+    - name: auditor-ciclo-de-software
+      description: Auditoria independente de entregas de software, critérios de aceite e evidências de testes sem implementar a entrega auditada
+      source: /Users/romuloigor/Local/the-library/skills/auditor-ciclo-de-software/SKILL.md
+
     - name: azure-devops-build-logs
       description: Coleta automatizada de timeline e logs de builds do Azure DevOps usando Azure CLI (script fetch_build_logs.sh)
       source: /Users/romuloigor/Local/the-library/skills/azure-devops-build-logs/SKILL.md
@@ -42,6 +46,10 @@ library:
     - name: dataplex-documentation-scan
       description: Criação, monitoramento e publicação de scans de documentação de dados do Dataplex em tabelas do BigQuery
       source: /Users/romuloigor/Local/the-library/skills/dataplex-documentation-scan/SKILL.md
+
+    - name: dev-ciclo-de-software
+      description: Desenvolvimento e implantação de software rastreável a README e TASKS, registrando Entregue e Testado com matriz de evidências
+      source: /Users/romuloigor/Local/the-library/skills/dev-ciclo-de-software/SKILL.md
 
     - name: developing-with-bigquery
       description: Desenvolvimento avançado, modelagem de dados e rotinas de consulta no BigQuery
