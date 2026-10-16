@@ -1,0 +1,130 @@
+#!/usr/bin/env python3
+"""
+ai-mem / ai-mem-wiki CLI Helper
+Squad Antigravity (SSoT)
+
+Utilitário de linha de comando e interface de Skill para busca semântica e FTS5
+na base de memória persistente do ai-memory.
+
+Exemplos de Uso:
+  ai-mem-wiki "anti-loop cmux"
+  ai-mem "arquitetura fowler"
+  ai-mem --project local-ai-memory "setup inicial"
+  ai-mem --project usit-wiki --limit 5 "100.86.22.127"
+"""
+
+import sys
+import os
+import argparse
+import subprocess
+import json
+import urllib.request
+import urllib.error
+
+DEFAULT_WORKSPACE = "default"
+DEFAULT_PROJECT = "usit-wiki"
+SERVER_URL = os.environ.get("AI_MEMORY_SERVER_URL", "http://127.0.0.1:49374")
+
+def check_health():
+    """Verifica se o daemon ai-memory está respondendo."""
+    try:
+        req = urllib.request.Request(f"{SERVER_URL}/healthz")
+        with urllib.request.urlopen(req, timeout=1.5) as resp:
+            return resp.status == 200
+    except Exception:
+        return False
+
+def get_auth_token():
+    """Recupera o token de autenticação local."""
+    token = os.environ.get("AI_MEMORY_AUTH_TOKEN")
+    if token:
+        return token
+    token_path = os.path.expanduser("~/Library/Application Support/ai-memory/auth-tokens/default")
+    if os.path.isfile(token_path):
+        try:
+            with open(token_path, "r", encoding="utf-8") as f:
+                return f.read().strip()
+        except Exception:
+            pass
+    return None
+
+def execute_search(workspace: str, project: str, query: str, limit: int = 10, as_json: bool = False):
+    """Executa a busca via CLI ai-memory."""
+    cmd = [
+        "ai-memory", "search",
+        "--workspace", workspace,
+        "--project", project,
+        "-n", str(limit)
+    ]
+    if as_json:
+        cmd.append("--json")
+    cmd.append(query)
+
+    try:
+        res = subprocess.run(cmd, capture_output=True, text=True, check=True)
+        return res.stdout
+    except subprocess.CalledProcessError as e:
+        # Se for erro 404 (projeto inexistente), informar com clareza
+        if "404 Not Found" in e.stderr:
+            return f"❌ Projeto '{project}' não encontrado no workspace '{workspace}'."
+        return f"❌ Erro na consulta ai-memory: {e.stderr.strip()}"
+    except FileNotFoundError:
+        return "❌ Erro: Comando 'ai-memory' não encontrado no PATH (~/.local/bin)."
+
+def main():
+    # Detectar se o script foi invocado como ai-mem-wiki
+    invoked_name = os.path.basename(sys.argv[0])
+    is_wiki_default = ("wiki" in invoked_name)
+
+    parser = argparse.ArgumentParser(
+        prog="ai-mem-wiki" if is_wiki_default else "ai-mem",
+        description="Pesquisa rápida na Fonte Única da Verdade (SSoT) via ai-memory (FTS5 & Semântica)."
+    )
+    parser.add_argument(
+        "query",
+        nargs="+",
+        help="Termo ou pergunta para busca semântica na memória persistente."
+    )
+    parser.add_argument(
+        "-p", "--project",
+        default=DEFAULT_PROJECT if is_wiki_default else DEFAULT_PROJECT,
+        help=f"Nome do projeto no ai-memory (Padrão: {DEFAULT_PROJECT})."
+    )
+    parser.add_argument(
+        "-w", "--workspace",
+        default=DEFAULT_WORKSPACE,
+        help=f"Nome do workspace (Padrão: {DEFAULT_WORKSPACE})."
+    )
+    parser.add_argument(
+        "-n", "--limit",
+        type=int,
+        default=10,
+        help="Número máximo de resultados retornados (Padrão: 10)."
+    )
+    parser.add_argument(
+        "--json",
+        action="store_true",
+        help="Retorna os resultados brutos em formato JSON."
+    )
+
+    args = parser.parse_args()
+    query_str = " ".join(args.query)
+
+    # 1. Checagem de disponibilidade do daemon
+    if not check_health():
+        print(f"⚠️  Aviso: O daemon do ai-memory não está respondendo em {SERVER_URL}.", file=sys.stderr)
+        print("💡 Inicie o serviço com: launchctl load ~/Library/LaunchAgents/com.github.akitaonrails.ai-memory.plist", file=sys.stderr)
+
+    # 2. Executar a consulta
+    output = execute_search(
+        workspace=args.workspace,
+        project=args.project,
+        query=query_str,
+        limit=args.limit,
+        as_json=args.json
+    )
+
+    print(output)
+
+if __name__ == "__main__":
+    main()

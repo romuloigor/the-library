@@ -15,6 +15,10 @@ library:
       description: Adiciona novos beta testers em builds e testes do aplicativo iOS
       source: /Users/romuloigor/Local/usit-tagaffinity/skills/adicione-novo-tester/SKILL.md
 
+    - name: ai-mem-wiki
+      description: Consulta semântica e recuperação FTS5 de diretivas, padrões arquiteturais e guias na SSoT do squad via ai-memory
+      source: /Users/romuloigor/Local/the-library/skills/ai-mem-wiki/SKILL.md
+
     - name: auditor-ciclo-de-software
       description: Auditoria independente de entregas de software, critérios de aceite e evidências de testes sem implementar a entrega auditada
       source: /Users/romuloigor/Local/the-library/skills/auditor-ciclo-de-software/SKILL.md
