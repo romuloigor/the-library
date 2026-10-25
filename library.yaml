@@ -115,6 +115,11 @@ library:
       description: Conexão, descoberta de schemas e execução de consultas no banco Oracle EBS (QEBSCNO) via VM odb-incorta
       source: /Users/romuloigor/Local/the-library/skills/oracle-odb-incorta/SKILL.md
 
+    - name: openflow-vertex-gemini-debug
+      description: Diagnostica e corrige falhas do OpenFlow com google-vertex Gemini 3/4 via WIF/ADC e reinicialização do engine
+      source: /Users/romuloigor/.gemini/config/skills/openflow-vertex-gemini-debug/SKILL.md
+
+
     - name: pdf
       description: Extração, leitura e manipulação de documentos PDF
       source: /Users/romuloigor/.codex/skills/pdf/SKILL.md
