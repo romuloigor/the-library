@@ -119,6 +119,10 @@ library:
       description: Extração, leitura e manipulação de documentos PDF
       source: /Users/romuloigor/.codex/skills/pdf/SKILL.md
 
+    - name: ponytail
+      description: Modo Lazy Senior Dev para redução de -53% de código sem comprometer segurança, diffs cirúrgicos e TDD estrito
+      source: /Users/romuloigor/.gemini/config/plugins/ponytail/skills/ponytail/SKILL.md
+
     - name: screenshot
       description: Captura e inspeção visual de telas no sistema
       source: /Users/romuloigor/.codex/skills/screenshot/SKILL.md
