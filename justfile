@@ -35,3 +35,16 @@ list:
 # Search the catalog by keyword
 search keyword:
     claude --dangerously-skip-permissions --model opus "/library search {{keyword}}"
+
+# Instala o git hook de sync do ai-memory no repositório da Wiki (Air ou Mini)
+install-wiki-hook wiki_path="/Users/romuloigor/Local/usit-developer-guide.wiki":
+    @mkdir -p "{{wiki_path}}/.git/hooks"
+    @cp hooks/wiki-post-commit-aimemory-sync.sh "{{wiki_path}}/.git/hooks/post-commit"
+    @chmod +x "{{wiki_path}}/.git/hooks/post-commit"
+    @echo "✅ Hook post-commit de sincronização com ai-memory instalado em {{wiki_path}}/.git/hooks/post-commit"
+
+# Lista hooks gerenciados pelo the-library
+hooks:
+    @echo "📦 Hooks no catálogo the-library:"
+    @ls -l hooks/
+

@@ -16,7 +16,7 @@ The Library solves a specific problem: you've built powerful agentics scattered 
 
 The Library is a single skill whose only job is to manage other skills. It's a catalog of references — local file paths and GitHub repo URLs — that point to where your agentics live. Nothing is copied or installed until you ask for it.
 
-Think of it as a `package.json` for agent capabilities — but instead of packages, you're managing skills, agents, and prompts. Instead of a registry, you're pointing at your own private GitHub repos and local paths.
+Think of it as a `package.json` for agent capabilities — but instead of packages, you're managing skills, agents, prompts, and **hooks**. Instead of a registry, you're pointing at your own private GitHub repos and local paths.
 
 **This is a pure agent application.** There are no scripts, no CLIs, no dependencies, no build tools. The entire application is encoded in `SKILL.md` and a set of cookbook instructions that teach the agent exactly what to do. The agent IS the runtime. This matters because:
 
@@ -61,6 +61,9 @@ default_dirs:
   prompts:
     - default: .claude/commands/
     - global: ~/.claude/commands/
+  hooks:
+    - default: .git/hooks/
+    - global: ~/.gemini/config/hooks.json
 
 library:
   skills:
@@ -227,6 +230,8 @@ just push my-skill         # Push changes back
 just add "name: foo, description: bar, source: /path/to/SKILL.md"
 just sync                  # Re-pull all installed items
 just search "keyword"
+just hooks                 # List managed hooks in the library catalog
+just install-wiki-hook     # Install ai-memory sync post-commit hook on Mac Air / Mac Mini
 ```
 
 > **Note:** Justfile recipes use `--dangerously-skip-permissions` because the agent needs filesystem and git access to clone, copy, and push. Review the `justfile` if you want to modify this behavior.
@@ -267,6 +272,7 @@ just search "keyword"
 | **Skills**      | Raw capabilities — what an agent can do        |
 | **Agents**      | Scale + parallelism + specialization           |
 | **Prompts**     | Orchestration — coordinate skills and agents   |
+| **Hooks**       | Lifecycle & deterministic triggers (Git & AGY) |
 | **Justfile**    | Terminal access without an interactive session |
 | **The Library** | Distribution across devices, teams, and agents |
 
