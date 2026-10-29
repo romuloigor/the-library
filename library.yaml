@@ -132,6 +132,10 @@ library:
       description: Captura e inspeção visual de telas no sistema
       source: /Users/romuloigor/.codex/skills/screenshot/SKILL.md
 
+    - name: security-audit
+      description: Guia e workflow multi-fase de auditoria de segurança da Cloudflare para bases de código, APIs, microsserviços e sistemas de IA/LLM
+      source: /Users/romuloigor/Local/the-library/skills/security-audit/SKILL.md
+
     - name: spec-kit
       description: Guia completo, automação e comandos do GitHub Spec Kit e Spec-Driven Development (SDD) para especificação executável
       source: /Users/romuloigor/Local/the-library/skills/spec-kit/SKILL.md
