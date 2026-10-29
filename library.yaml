@@ -148,6 +148,10 @@ library:
       description: Perfil profissional de Rômulo Igor, diretrizes operacionais, preferências de trabalho e contextos de projetos
       source: /Users/romuloigor/Local/the-library/skills/user-profile-and-preferences/SKILL.md
 
+    - name: elephant-goldfish-model
+      description: Metodologia e workflows do Google Elephant-Goldfish Model (EGM) para Spec-Driven Development, separando sessões com memória ampla (Elephant) de revisões adversariais sem contexto (Goldfish)
+      source: /Users/romuloigor/Local/the-library/skills/elephant-goldfish-model/SKILL.md
+
     - name: xcode-cloud-api
       description: Integração e gerenciamento de workflows na API do Xcode Cloud
       source: /Users/romuloigor/Local/usit-tagaffinity/skills/xcode-cloud-api/SKILL.md
